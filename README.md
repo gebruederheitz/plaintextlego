@@ -4,18 +4,14 @@ _Assemble plaintext files from modules (via comment lines)_
 
 ---
 
-This library is mainly used for the `@ghcore/htmodules` utility to dynamically
+This library is mainly used for the `@gebruederheitz/htmodules` utility to dynamically
 build modular `.htaccess` files.
 
 
 ## Installation
 
-While it's published on the private /ghcore npm registry, you will need to 
-provide an `.npmrc` file with your credentials (see under 
-[Development](#development)). Once that is set up, simply use npm:
-
 ```
-npm install @ghcore/plaintextlego
+npm i @gebruederheitz/plaintextlego
 ```
 
 ## Usage
@@ -73,7 +69,7 @@ You have been replaced! h4xx0rZ!!
 You could then run the following:
 
 ```js
-import { PlainTextLego } from '@ghcore/plaintextlego';
+import { PlainTextLego } from '@gebruederheitz/plaintextlego';
 
 const ptl = new PlainTextLego('./file.txt');
 ptl.run({
@@ -140,7 +136,7 @@ All of the above describes usage with ES modules. In many cases you might want
 to use the CommonJS builds (when building nodeJS libraries for instance):
 
 ```js
-const {PlainTextLego} = require('@ghcore/plaintextlego');
+const {PlainTextLego} = require('@gebruederheitz/plaintextlego');
 ```
 
 ### Caveats
@@ -164,7 +160,23 @@ $> yarn install
 
 # Watch sources
 $> yarn watch
+# or
+$> make dev
 
 # Create production builds
 $> yarn build
+# or
+$> make build
+
+# Run the demo: Apply example modules to example base file; print result
+$> yarn run:demo
+
+# Lint files and check if they match the code style using eslint & prettier
+$> yarn lint
+
+# Run the mocha test suite
+$> yarn test
+
+# Install dependencies, lint sources, run test suite:
+$> make test
 ```

@@ -17,30 +17,13 @@ some more very generic content that would probably throw an error if this
 was a real .htaccess file
 
 # BEGIN replaceme
-# YOU HAVE BEEN REPLACED!
-Redirect /root /vulnerability
+
+This content will not survive
+
 # END replaceme
 
 # Another comment that serves only as a filler.
 
 # BEGIN ghwp
-# Custom Redirects for the GHWP project
-
-# no redirects for you!
-
-
-
-#         .__         .__        __                   __
-#  ______ |  | _____  |__| _____/  |_  ____ ___  ____/  |_
-#  \____ \|  | \__  \ |  |/    \   __\/ __ \\  \/  /\   __\
-#  |  |_> >  |__/ __ \|  |   |  \  | \  ___/ >    <  |  |
-#  |   __/|____(____  /__|___|  /__|  \___  >__/\_ \ |__|
-#  |__|             \/        \/          \/      \/
-#                    .__
-#                    |  |   ____   ____   ____
-#                    |  | _/ __ \ / ___\ /  _ \
-#                    |  |_\  ___// /_/  >  <_> )
-#                    |____/\___  >___  / \____/
-#                              \/_____/
 
 # END ghwp

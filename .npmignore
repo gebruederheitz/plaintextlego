@@ -5,3 +5,5 @@ examples/
 .eslintrc
 .prettierrc
 .rollup.config.js
+
+test/**/result
