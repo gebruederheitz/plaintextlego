@@ -1,0 +1,26 @@
+# This is some generic content at the top of the file
+<IfModule mod.rewrite>
+    RewriteCond ${REQUEST_PATH} /somepath
+    RewriteRule /original/(.*) /other/$1 [R,L]
+</IfModule>
+
+# BEGIN generic
+
+# This is a generic module contained within the original file.
+# It should be parsed by the library, but not changed (unless a module called
+# "generic" is specified.
+Allow all
+
+# END generic
+
+some more very generic content that would probably throw an error if this
+was a real .htaccess file
+
+# BEGIN replaceme
+
+# here comes a bit that should be replaced by the replaceme module
+Redirect /home /root
+
+# END replaceme
+
+# Another comment that serves only as a filler.
