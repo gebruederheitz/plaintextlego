@@ -1,6 +1,9 @@
 dist/
 node_modules/
-.npmrc
 examples/result
 
 test/**/result
+
+.task/
+.parcel-cache/
+.idea/

@@ -1,0 +1,39 @@
+version: 3
+tasks:
+  build:
+    deps: [install, test]
+    cmd: npm run build
+
+  dev:
+    deps: [install]
+    cmd: npm run watch
+
+  lint:
+    deps: [install]
+    cmds:
+      - npm run lint:eslint
+      - npm run lint:prettier
+
+  test:
+    deps: [install, lint]
+    cmds:
+      - npm run test
+
+  install-language:
+    run: once
+    status:
+      - asdf current nodejs
+    cmd: asdf install
+
+  install-deps:
+    aliases: [install, install-dependencies]
+    run: when_changed
+    sources:
+      - package-json
+      - package-lock.json
+    generates:
+      - package-lock.json
+      - node_modules/**/*
+    deps:
+      - install-language
+    cmd: npm i

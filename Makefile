@@ -1,10 +1,16 @@
 .PHONY: test
 
-build:
-	yarn && yarn build
+install:
+	npm i
 
-dev:
-	yarn && yarn watch
+build: install
+	npm run build
 
-test:
-	yarn && yarn lint && yarn test
+dev: install
+	npm run watch
+
+test: install
+	npm run lint:eslint
+	npm run lint:prettier
+	npm run test
+
