@@ -133,7 +133,7 @@ ptl.run(modules, './result.txt');
 ```
 
 All of the above describes usage with ES modules. In many cases you might want
-to use the CommonJS builds (when building nodeJS libraries for instance):
+to use the CommonJS builds (when building (older) nodeJS libraries for instance):
 
 ```js
 const {PlainTextLego} = require('@gebruederheitz/plaintextlego');
@@ -141,10 +141,11 @@ const {PlainTextLego} = require('@gebruederheitz/plaintextlego');
 
 ### Caveats
 
- - Modules can currently not be removed. They can only be "emptied" by providing 
-   an empty module file.
+ - ~~Modules can currently not be removed. They can only be "emptied" by providing 
+   an empty module file.~~ An empty module file will remove that block from the
+   target. This currently suffers from some whitespace pollution, however.
  - Custom ordering is currently not possible and can only be guaranteed if the
-   module blocks exists in the base file. New blocks will always be appended to
+   module blocks exist in the base file. New blocks will always be appended to
    the end of the file.
 
 ## Development

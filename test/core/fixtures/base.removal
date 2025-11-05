@@ -8,8 +8,16 @@ Test
 
 Sunt hydraes imperium pius, primus assimilatioes.
 
+# BEGIN removal
+
+This content will be removed after processing.
+
+
+# END removal
+
 # BEGIN preserved
 
 This content is here to stay.
 
 # END preserved
+
