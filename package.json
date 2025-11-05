@@ -29,8 +29,7 @@
     "lint:prettier": "prettier -c --config ./.prettierrc src/",
     "run:demo": "node ./examples/runner.js && cat ./examples/result",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "prepublishOnly": "yarn lint && yarn test && yarn build"
+    "test:watch": "vitest"
   },
   "dependencies": {
     "lodash-es": "^4.17.21"

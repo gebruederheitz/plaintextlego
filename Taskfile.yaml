@@ -19,6 +19,10 @@ tasks:
     cmds:
       - npm run test
 
+  release:
+    deps: [install]
+    cmd: npx release-it --only-version
+
   install-language:
     run: once
     status:

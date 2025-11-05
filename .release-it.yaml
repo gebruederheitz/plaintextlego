@@ -10,7 +10,7 @@ npm:
     publish: true
 hooks:
     before:init:
-        - "task lint test"
+        - "task lint test build"
     after:bump:
         - npm i
         - git add ./package-lock.json
