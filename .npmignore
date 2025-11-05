@@ -1,10 +1,11 @@
 examples/
-.babelrc.json
-.browserslistrc
-.eslintignore
-.eslintrc
+eslint.config.mjs
 .prettierrc
-.rollup.config.js
-.idea/
+.tool-versions
+Taskfile.yaml
+Makefile
 
-test/**/result
+test/
+.parcel-cache/
+.task/
+.idea/

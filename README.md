@@ -149,34 +149,14 @@ const {PlainTextLego} = require('@gebruederheitz/plaintextlego');
 
 ## Development
 
-Please use the [`yarn`](https://classic.yarnpkg.com/en/docs/install) package manager.
-Use `eslint` & `prettier`.
+Use [asdf](https://asdf-vm.com) with NPM, eslint and prettier. Using 
+[go-task / Taskfiles](https://taskfile.dev) gives you a head start over the
+competition.
 
 ```shell
-# Install dependencies implicitly...
-$> yarn
-# ...or explicitly
-$> yarn install
-
-# Watch sources
-$> yarn watch
-# or
-$> make dev
-
-# Create production builds
-$> yarn build
-# or
-$> make build
+# List all the available tasks
+$> task -l 
 
 # Run the demo: Apply example modules to example base file; print result
-$> yarn run:demo
-
-# Lint files and check if they match the code style using eslint & prettier
-$> yarn lint
-
-# Run the mocha test suite
-$> yarn test
-
-# Install dependencies, lint sources, run test suite:
-$> make test
+$> npm run run:demo
 ```
