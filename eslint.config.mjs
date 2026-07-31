@@ -1,7 +1,5 @@
 import prettier from 'eslint-plugin-prettier';
-// import babel from '@babel/eslint-plugin';
 import globals from 'globals';
-// import babelParser from '@babel/eslint-parser';
 import js from '@eslint/js';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 
@@ -10,19 +8,13 @@ export default [
     prettierRecommended,
     {
         // ignores: [
-        //     '**/gulp/',
-        //     'node_modules/*',
-        //     'modules/smsf-registration-form/',
-        //     'modules/webinar-migrator/',
         // ],
 
         plugins: {
             prettier,
-            // '@babel': babel,
         },
 
         languageOptions: {
-            // parser: babelParser,
             ecmaVersion: 2021,
             sourceType: 'module',
 
@@ -31,11 +23,6 @@ export default [
                 window: true,
                 console: true,
             },
-            // parserOptions: {
-            //     babelOptions: {
-            //         presets: ['@babel/preset-react'],
-            //     },
-            // },
         },
 
         rules: {
