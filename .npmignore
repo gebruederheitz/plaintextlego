@@ -1,11 +1,13 @@
 examples/
 eslint.config.mjs
+vitest.config.mjs
 .prettierrc
 .tool-versions
 Taskfile.yaml
-Makefile
 
 test/
 .parcel-cache/
 .task/
 .idea/
+CLAUDE.md
+.release-it.yaml

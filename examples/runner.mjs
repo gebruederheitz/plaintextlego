@@ -1,4 +1,4 @@
-const { PlainTextLego } = require('../dist');
+import { PlainTextLego } from '../dist/index.mjs';
 
 const p = new PlainTextLego('./examples/.htaccess');
 const modules = {

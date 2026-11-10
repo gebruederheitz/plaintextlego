@@ -1,7 +1,9 @@
 version: 3
 tasks:
   build:
-    deps: [install, test]
+    desc: Build dist/ on the .tool-versions Node.js, as published
+    deps: [install]
+    run: once
     cmd: npm run build
 
   dev:
@@ -15,9 +17,38 @@ tasks:
       - npm run lint:prettier
 
   test:
+    desc: Build once, then test the build on every supported Node.js LTS line
     deps: [install, lint]
     cmds:
-      - npm run test
+      # Sequential on purpose: the tests write to the shared fixture result
+      # file.
+      - for:
+          matrix:
+            NODE: ['22', '24', '26']
+        task: test:node
+        vars:
+          NODE: '{{.ITEM.NODE}}'
+
+  test:node:
+    desc: Test the build on the newest installed Node.js of one major line (NODE=24)
+    label: 'test:node:{{.NODE}}'
+    silent: true
+    requires:
+      vars: [NODE]
+    deps: [install, build]
+    cmds:
+      - |
+        latest_installed() {
+          asdf list nodejs {{.NODE}} 2>/dev/null | tr -d ' *' | grep -E '^[0-9]' | sort -V | tail -n 1
+        }
+        version=$(latest_installed)
+        if [ -z "$version" ]; then
+          asdf install nodejs latest:{{.NODE}}
+          version=$(latest_installed)
+        fi
+        export ASDF_NODEJS_VERSION=$version
+        echo "Testing the build on Node.js $(node --version)"
+        npx vitest run
 
   release:
     deps: [install]
@@ -33,7 +64,7 @@ tasks:
     aliases: [install, install-dependencies]
     run: when_changed
     sources:
-      - package-json
+      - package.json
       - package-lock.json
     generates:
       - package-lock.json

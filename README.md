@@ -14,6 +14,10 @@ build modular `.htaccess` files.
 npm i @gebruederheitz/plaintextlego
 ```
 
+plaintextlego supports every Node.js release line that is currently in LTS
+(active or maintenance), and the published build is tested on each of them. The exact
+minimum version is the `engines` field in `package.json`.
+
 ## Usage
 
 This library will parse a base file passed to the constructor and attempt to
@@ -132,12 +136,7 @@ const modules = {
 ptl.run(modules, './result.txt');
 ```
 
-All of the above describes usage with ES modules. In many cases you might want
-to use the CommonJS builds (when building (older) nodeJS libraries for instance):
-
-```js
-const {PlainTextLego} = require('@gebruederheitz/plaintextlego');
-```
+The package is published as an ES module only.
 
 ### Caveats
 
@@ -158,6 +157,14 @@ competition.
 # List all the available tasks
 $> task -l 
 
-# Run the demo: Apply example modules to example base file; print result
+# Build once, then test the build on every supported Node.js LTS line
+$> task test
+
+# The tests run against dist/: while developing, rebuild on change …
+$> task dev
+# … and rerun the tests on rebuild (in a second terminal)
+$> npx vitest
+
+# Run the demo (needs a build in dist/): Apply example modules to example base file; print result
 $> npm run run:demo
 ```

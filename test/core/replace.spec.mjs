@@ -2,7 +2,7 @@ import { describe, it } from 'vitest';
 
 import * as chai from 'chai';
 import chaiFiles, { file } from 'chai-files';
-import { PlainTextLego } from '../../src/index.mjs';
+import { PlainTextLego } from '@gebruederheitz/plaintextlego';
 import path from 'path';
 
 chai.use(chaiFiles);
