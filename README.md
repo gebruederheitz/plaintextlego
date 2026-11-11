@@ -145,11 +145,18 @@ const removed = await ptl.run(modules, target, { owner, force });
 
 Module content is inserted verbatim. A missing final line break is added, so
 `# END` always starts its own line. An empty module produces an empty block.
+Module content must not contain lines starting with `# BEGIN ` or `# END `,
+see below.
 
 `run()` rejects without writing anything when:
 
 - **a module file cannot be read** (`error.code === 'PTL_MODULE_UNREADABLE'`):
   skipping it would remove its block.
+- **a module contains a block delimiter**, a line starting with `# BEGIN ` or
+  `# END ` (`error.code === 'PTL_MODULE_INVALID'`): the next run would read it
+  as the start or end of a block, which can delete other blocks or append the
+  module again on every run. This applies to delimiters of any name, including
+  foreign ones such as `# END WordPress`.
 - **no modules are given** while the file holds owned blocks
   (`error.code === 'PTL_NO_MODULES'`): this usually means the module files went
   missing, and it would remove every owned block. Pass `force: true` if that is
@@ -180,6 +187,8 @@ The package is published as an ES module only.
   Remove a block by no longer passing its module.
 - Module files that cannot be read now make `run()` reject; they used to be
   skipped.
+- Module files with lines starting with `# BEGIN ` or `# END ` now make `run()`
+  reject; they used to corrupt the file on the next run.
 - `run()` resolves with the names of the removed blocks instead of `undefined`.
 
 ## Development

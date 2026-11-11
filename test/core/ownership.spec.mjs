@@ -158,7 +158,7 @@ describe('Module content', () => {
     });
 
     it('inserts content verbatim, including $ patterns, into an empty block', async () => {
-        const rule = 'RewriteRule ^(.*)$ /$1 [L]\n$$ $& $` $\'\n';
+        const rule = "RewriteRule ^(.*)$ /$1 [L]\n$$ $& $` $'\n";
         const b = await base('# BEGIN ptl:x\n# END ptl:x\n');
 
         const { content } = await b.run({ x: rule });
@@ -207,5 +207,39 @@ describe('Failure paths', () => {
             })
         ).rejects.toMatchObject({ code: 'PTL_MODULE_UNREADABLE' });
         expect(await b.read()).toBe(original);
+    });
+
+    it.each([
+        ['an owned END line', 'doc\n# END ptl:a\nrule\n', 2],
+        ['a foreign END line', '# END WordPress\n', 1],
+        ['a BEGIN line', 'one\ntwo\n# BEGIN WordPress\n', 3],
+        ['a CRLF END line', 'doc\r\n# END WordPress\r\n', 2],
+    ])(
+        'rejects a module with %s without writing anything',
+        async (_, moduleContent, line) => {
+            const original =
+                '# BEGIN ptl:a\nA\n# END ptl:a\n\n# BEGIN WordPress\nwp\n# END WordPress\n';
+            const b = await base(original);
+
+            await expect(
+                b.run({ a: 'A\n', b: moduleContent })
+            ).rejects.toMatchObject({
+                code: 'PTL_MODULE_INVALID',
+                message: expect.stringContaining(`line ${line}`),
+            });
+            expect(await b.read()).toBe(original);
+        }
+    );
+
+    it('accepts lines that only resemble block delimiters', async () => {
+        const lookalikes =
+            '  # END ptl:a\n#END ptl:a\n# ENDING\n# BEGINNING\n# END\nfoo # BEGIN x\n';
+        const b = await base('# BEGIN ptl:a\nA\n# END ptl:a\n');
+
+        const first = await b.run({ a: lookalikes });
+        const second = await b.run({ a: lookalikes });
+
+        expect(first.content).toBe(`# BEGIN ptl:a\n${lookalikes}# END ptl:a\n`);
+        expect(second.content).toBe(first.content);
     });
 });

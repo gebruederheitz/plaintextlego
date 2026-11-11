@@ -179,8 +179,9 @@ export class PlainTextLego {
     }
 
     /**
-     * Reads all module files. Rejects if one cannot be read: skipping it
-     * would remove its block.
+     * Reads all module files. Rejects if one cannot be read, because
+     * skipping it would remove its block, or if one contains a block
+     * delimiter line.
      *
      * @protected
      * @param {ModuleDefinition} modules
@@ -195,8 +196,9 @@ export class PlainTextLego {
                     `Invalid module name ${JSON.stringify(moduleName)}: it must be non-empty and fit on one line.`
                 );
             }
+            let content;
             try {
-                contents.set(moduleName, await this.readFile(fileName));
+                content = await this.readFile(fileName);
             } catch (cause) {
                 throw this.createError(
                     'PTL_MODULE_UNREADABLE',
@@ -204,9 +206,34 @@ export class PlainTextLego {
                     cause
                 );
             }
+            this.validateModuleContent(moduleName, fileName, content);
+            contents.set(moduleName, content);
         }
 
         return contents;
+    }
+
+    /**
+     * Rejects content with a line that the parser would read as a block
+     * delimiter on the next run. Such a line can end another block early,
+     * deleting the foreign blocks in between, or hide this module's block so
+     * it is appended again on every run.
+     *
+     * @protected
+     * @param {string} moduleName
+     * @param {string} fileName
+     * @param {string} content
+     */
+    validateModuleContent(moduleName, fileName, content) {
+        const index = content
+            .split('\n')
+            .findIndex((line) => /^# (BEGIN|END) /.test(line));
+        if (index !== -1) {
+            throw this.createError(
+                'PTL_MODULE_INVALID',
+                `Module "${moduleName}" in ${fileName} contains a block delimiter on line ${index + 1}. Lines starting with "# BEGIN " or "# END " would break the file on the next run.`
+            );
+        }
     }
 
     /**
