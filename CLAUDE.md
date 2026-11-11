@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`@gebruederheitz/plaintextlego` assembles a plain-text file from a base file plus "module" files. Blocks in the base file are delimited by `# BEGIN <name>` and `# END <name>` comment lines. Blocks that plaintextlego writes carry an owner prefix (`# BEGIN ptl:<module>`); each module file supplies the content of its owned block, and owned blocks without a module are removed. The README has a full input/output example, the API and the upgrade notes.
+`@gebruederheitz/plaintextlego` assembles a plain-text file from a base file plus "module" files. Blocks in the base file are delimited by `# BEGIN <name>` and `# END <name>` comment lines. Blocks that plaintextlego writes carry an owner prefix (`# BEGIN ptl:<module>`); each module file supplies the content of its owned block, and owned blocks without a module are removed. The README has a full input/output example and the API; `UPGRADING.md` has the steps for each major version.
 
 Two terms are used throughout `src/PlainTextLego.mjs`: a **block** is the text between a BEGIN/END pair in the base (or target) file, represented by `src/Block.mjs`; a **module** is a source file whose content creates or replaces an owned block; the **owner** is the name prefix (`ptl` by default, `run()` option `owner`) that marks a block as written by plaintextlego. A block is owned exactly when its name starts with `<owner>:`; every other block is foreign and never touched.
 

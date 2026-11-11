@@ -177,19 +177,10 @@ stays as it is, and the module is appended at the end.
 
 The package is published as an ES module only.
 
-### Upgrading from version 2
+### Upgrading
 
-- Blocks are only recognised with the owner prefix. Rename the blocks your
-  modules manage once, in place: `# BEGIN name` → `# BEGIN ptl:name` and
-  `# END name` → `# END ptl:name` (or your own `owner`). Otherwise each module
-  is appended a second time, and the old block stays.
-- An empty module file no longer removes its block; it writes an empty one.
-  Remove a block by no longer passing its module.
-- Module files that cannot be read now make `run()` reject; they used to be
-  skipped.
-- Module files with lines starting with `# BEGIN ` or `# END ` now make `run()`
-  reject; they used to corrupt the file on the next run.
-- `run()` resolves with the names of the removed blocks instead of `undefined`.
+See [UPGRADING.md](UPGRADING.md) for the steps from version 1 to 2 and from 2
+to 3.
 
 ## Development
 
