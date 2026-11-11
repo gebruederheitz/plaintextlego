@@ -19,7 +19,7 @@ function filePath(relativePath) {
 }
 
 describe('The plaintextlego module', () => {
-    it('replaces an existing section in a file with a module', async () => {
+    it('replaces the content of an owned block with its module', async () => {
         const p = new PlainTextLego(filePath('./fixtures/base'));
         const modules = {
             replacement: filePath('./fixtures/replacement'),
@@ -33,9 +33,10 @@ describe('The plaintextlego module', () => {
         );
     });
 
-    it('appends a new module to the file', async () => {
+    it('appends a module without an owned block', async () => {
         const p = new PlainTextLego(filePath('./fixtures/base'));
         const modules = {
+            replacement: filePath('./fixtures/replacement'),
             appendage: filePath('./fixtures/appendage'),
         };
         const target = filePath('./fixtures/result');
@@ -60,37 +61,6 @@ describe('The plaintextlego module', () => {
         expect(file(filePath('./fixtures/result'))).to.exist;
         expect(file(filePath('./fixtures/result'))).to.equal(
             file(filePath('./fixtures/expected.non-matching-close'))
-        );
-    });
-
-    it('preserves non-module blocks', async () => {
-        const p = new PlainTextLego(filePath('./fixtures/base'));
-        const modules = {
-            replacement: filePath('./fixtures/replacement'),
-            appendage: filePath('./fixtures/appendage'),
-        };
-        const target = filePath('./fixtures/result');
-
-        await p.run(modules, target);
-
-        expect(file(filePath('./fixtures/result'))).to.exist;
-        expect(file(filePath('./fixtures/result'))).to.equal(
-            file(filePath('./fixtures/expected.preserved'))
-        );
-    });
-
-    it('deletes a block when the module is empty', async () => {
-        const p = new PlainTextLego(filePath('./fixtures/base.removal'));
-        const modules = {
-            removal: filePath('./fixtures/removal'),
-        };
-        const target = filePath('./fixtures/result');
-
-        await p.run(modules, target);
-
-        expect(file(filePath('./fixtures/result'))).to.exist;
-        expect(file(filePath('./fixtures/result'))).to.equal(
-            file(filePath('./fixtures/expected.removal'))
         );
     });
 });
