@@ -1,6 +1,6 @@
 {
     "name": "@gebruederheitz/plaintextlego",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "description": "Parse, generate and edit building block in plain text files.",
     "source": "src/index.mjs",
     "module": "dist/index.mjs",
