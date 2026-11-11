@@ -1,10 +1,8 @@
 Hercle, abactus altus!.
 
-# BEGIN replacement
-
-Test
-
-# END replacement
+# BEGIN ptl:replacement
+This content has been replaced.
+# END ptl:replacement
 
 Sunt hydraes imperium pius, primus assimilatioes.
 
@@ -14,9 +12,6 @@ This content is here to stay.
 
 # END preserved
 
-# BEGIN appendage
-
+# BEGIN ptl:appendage
 This content should be appended.
-
-
-# END appendage
+# END ptl:appendage

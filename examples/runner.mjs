@@ -7,4 +7,6 @@ const modules = {
 };
 const target = './examples/result';
 
-p.run(modules, target).then(console.log);
+p.run(modules, target).then((removed) =>
+    console.log('Removed blocks:', removed)
+);

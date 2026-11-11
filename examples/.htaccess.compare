@@ -16,11 +16,11 @@ Allow all
 some more very generic content that would probably throw an error if this
 was a real .htaccess file
 
-# BEGIN replaceme
+# BEGIN ptl:replaceme
 
 # here comes a bit that should be replaced by the replaceme module
 Redirect /home /root
 
-# END replaceme
+# END ptl:replaceme
 
 # Another comment that serves only as a filler.
